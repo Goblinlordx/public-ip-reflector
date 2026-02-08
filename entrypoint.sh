@@ -34,12 +34,12 @@ detect_ip() {
 }
 
 reflect_k8s() {
-    local ip=$1
-    local svc=${K8S_SERVICE:-"ddns-source"}
-    local ns=${K8S_NAMESPACE:-"infra"}
+    _ip="$1"
+    _svc="${K8S_SERVICE:-"ddns-source"}"
+    _ns="${K8S_NAMESPACE:-"infra"}"
     
-    echo "Reflecting to Kubernetes: Service ${svc} in Namespace ${ns}"
-    kubectl patch svc "${svc}" -n "${ns}" -p "{\"spec\":{\"externalIPs\":[\"${ip}\"]}}"
+    echo "Reflecting to Kubernetes: Service ${_svc} in Namespace ${_ns}"
+    kubectl patch svc "${_svc}" -n "${_ns}" -p "{\"spec\":{\"externalIPs\":[\"${_ip}\"]}}"
 }
 
 reflect_stdout() {
