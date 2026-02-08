@@ -1,0 +1,6 @@
+apiVersion: v2
+name: public-ip-reflector
+description: A Helm chart for public-ip-reflector
+type: application
+version: 0.1.0
+appVersion: "latest"

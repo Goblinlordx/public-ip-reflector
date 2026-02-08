@@ -1,0 +1,41 @@
+# Default values for public-ip-reflector.
+
+replicaCount: 1
+
+image:
+  repository: baldiviab/public-ip-reflector
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+config:
+  # Sequential sources for IP detection
+  ipSource: "ifconfig,icanhazip,ident,ipecho"
+  # Reflection strategy: stdout, k8s, or a custom command
+  reflectTo: "stdout"
+  # Target k8s service (only if reflectTo: k8s)
+  k8sService: "ddns-source"
+  # Target namespace (only if reflectTo: k8s)
+  k8sNamespace: "infra"
+
+# If reflectTo: k8s, you need to enable RBAC
+rbac:
+  create: true
+
+cronJob:
+  enabled: true
+  schedule: "*/5 * * * *" # Every 5 minutes
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 3
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 10m
+    memory: 64Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
