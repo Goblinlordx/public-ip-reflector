@@ -1,6 +1,6 @@
 .git
 .github
-example
+charts
 brain
 *.md
 .dockerignore

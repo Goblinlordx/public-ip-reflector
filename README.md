@@ -41,7 +41,7 @@ helm upgrade --install public-ip-reflector oci://ghcr.io/benbaldivia/charts/publ
 If you have cloned the repository, you can install from the `example` folder:
 
 ```bash
-helm upgrade --install public-ip-reflector ./example/public-ip-reflector \
+helm upgrade --install public-ip-reflector ./charts/public-ip-reflector \
   --set config.reflectTo=k8s \
   --set config.k8sService=my-ddns-svc
 ```

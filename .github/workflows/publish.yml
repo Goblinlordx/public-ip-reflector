@@ -63,5 +63,5 @@ jobs:
       - name: Package and Push Helm Chart
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ghcr.io -u ${{ github.actor }} --password-stdin
-          helm package example/public-ip-reflector
+          helm package charts/public-ip-reflector
           helm push public-ip-reflector-*.tgz oci://ghcr.io/${{ github.repository_owner }}/charts
