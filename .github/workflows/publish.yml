@@ -64,6 +64,11 @@ jobs:
         run: |
           # GHCR requires lowercase repository names
           OWNER_LOWER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          # Extract version from tag (e.g., v1.0.0 -> 1.0.0)
+          VERSION=${GITHUB_REF_NAME#v}
+          # appVersion matches the full tag (e.g., v1.0.0)
+          APP_VERSION=${GITHUB_REF_NAME}
+          
           echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ghcr.io -u ${{ github.actor }} --password-stdin
-          helm package charts/public-ip-reflector
-          helm push public-ip-reflector-*.tgz oci://ghcr.io/${OWNER_LOWER}/charts
+          helm package charts/public-ip-reflector --version "${VERSION}" --app-version "${APP_VERSION}"
+          helm push public-ip-reflector-${VERSION}.tgz oci://ghcr.io/${OWNER_LOWER}/charts

@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   repository: baldiviab/public-ip-reflector
   pullPolicy: IfNotPresent
-  tag: "latest"
+  tag: ""
 
 config:
   # Sequential sources for IP detection
