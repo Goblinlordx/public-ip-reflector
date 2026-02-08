@@ -32,7 +32,8 @@ docker build -t baldiviab/public-ip-reflector .
 You can install the chart directly from the GitHub Container Registry (GHCR) without cloning the repository:
 
 ```bash
-helm upgrade --install public-ip-reflector oci://ghcr.io/goblinlordx/charts/public-ip-reflector \
+# Install specific version (Recommended)
+helm upgrade --install public-ip-reflector oci://ghcr.io/goblinlordx/charts/public-ip-reflector --version 1.0.0 \
   --set config.reflectTo=k8s \
   --set config.k8sService=my-ddns-svc
 ```
