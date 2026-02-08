@@ -27,7 +27,18 @@ docker build -t baldiviab/public-ip-reflector .
 ## Deployment
 
 ### Helm (Recommended)
-An example Helm chart is provided in the `example/public-ip-reflector` folder. This allows you to deploy the reflector as a `CronJob` to keep your public IP up-to-date.
+
+#### Option 1: OCI Registry (Direct)
+You can install the chart directly from the GitHub Container Registry without cloning the repository:
+
+```bash
+helm upgrade --install public-ip-reflector oci://ghcr.io/benbaldivia/charts/public-ip-reflector \
+  --set config.reflectTo=k8s \
+  --set config.k8sService=my-ddns-svc
+```
+
+#### Option 2: Local Chart (from source)
+If you have cloned the repository, you can install from the `example` folder:
 
 ```bash
 helm upgrade --install public-ip-reflector ./example/public-ip-reflector \
