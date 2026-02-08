@@ -12,4 +12,4 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 USER 65534:65534
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["echo", "{{PUBLIC_IP}}"]
+CMD []

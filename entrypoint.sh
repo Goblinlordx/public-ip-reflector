@@ -6,6 +6,13 @@ SOURCES=${IP_SOURCE:-${IP_SERVICE:-$DEFAULT_SOURCES}}
 PLACEHOLDER=${IP_PLACEHOLDER:-"{{PUBLIC_IP}}"}
 REFLECT_TO=${REFLECT_TO:-"stdout"}
 
+# Normalize REFLECT_TO for known values (ignore case/whitespace), but keep original for custom commands
+_clean_reflect=$(echo "${REFLECT_TO}" | tr '[:upper:]' '[:lower:]' | tr -d '[:space:]')
+case "$_clean_reflect" in
+    "k8s") REFLECT_TO="k8s" ;;
+    "stdout") REFLECT_TO="stdout" ;;
+esac
+
 get_url() {
     case "$1" in
         "ifconfig") echo "https://ifconfig.me" ;;
